@@ -1,6 +1,6 @@
-// Main startup logic – now redirects to index.html after login
+// bootstrap.js – Main startup logic
 
-window.showConfigError = function() {
+window.showConfigError = function () {
   const root = document.getElementById('app-root');
   root.innerHTML = `
     <div style="display:flex; align-items:center; justify-content:center; height:100vh; background:#f4f7fa;">
@@ -17,31 +17,32 @@ async function bootstrap() {
     window.showConfigError();
     return;
   }
+
   if (!window.supabaseClient) {
     console.error('Supabase client not initialized');
     return;
   }
 
-  // Check existing session
+  const isStartPage = window.location.pathname.includes('start.html');
   const { data: { session } } = await window.supabaseClient.auth.getSession();
-  if (session) {
-    // User already logged in → go to main app
+
+  // If already logged in and not on the auth page, go straight to the app
+  if (session && !isStartPage) {
     window.location.href = '/';
     return;
   }
 
-  // No session → show auth UI
+  // Render the auth UI (on start.html always, or on any page without a session)
   document.getElementById('app-root').innerHTML = window.renderAuthUI();
   window.initTabsAndSwitches();
   window.attachAuthEventListeners();
 
-  // Listen for auth state changes (signup / login)
+  // Listen for auth state changes
   window.supabaseClient.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
-      // After successful login or signup, redirect to the main app
+      // Redirect to main app after login or signup
       window.location.href = '/';
     } else if (event === 'SIGNED_OUT') {
-      // Optional: reload the login page if needed
       window.location.reload();
     }
   });
