@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config'; 
 import cors from 'cors';
 import axios from 'axios';
 import fs from 'fs/promises';
@@ -12,16 +13,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ── Config ───────────────────────────────────────────────
-const RF_API_KEY   = 'a94Bq3PLxRhifix6Opq0';   // Roboflow key (hardcoded)
+const RF_API_KEY   = process.env.RF_API_KEY;    // Roboflow key (hardcoded)
 const PORT         = 3000;
 const OLLAMA_MODEL = 'llama3.2';
 const ollama       = new Ollama({ host: 'http://127.0.0.1:11434' });
 
-const ELEVENLABS_API_KEY = 'sk_2ab6c79159d470d57161deb220660b9f054431a3c3e4e325';
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 const DEFAULT_VOICE_ID   = 'EXAVITQu4vr4xnSDxMaL';   // your library voice (requires paid plan)
 
 const MODEL_MAP = {
-    building: 'geoscope-v2/1',
+    building: 'geoscope-v2/2',   // updated
     hvac: 'hvac-detection-ujree/4'
 };
 const DEFAULT_MODEL = MODEL_MAP.building;
