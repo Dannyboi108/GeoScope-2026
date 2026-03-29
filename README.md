@@ -1,6 +1,6 @@
 # GeoScope 🛰
 
-A MapBox tile viewer with AI-powered building detection. Fetch satellite or street-level map tiles for any coordinate on Earth, then run a Roboflow semantic segmentation model to detect and outline buildings — results open in a dedicated result page with stats and a download option.
+A MapBox tile viewer with AI-powered building detection. Fetch satellite or street-level map tiles for any coordinate on Earth, then run a Roboflow object detection model to detect and outline buildings — results open in as a result in the page with stats and a download option.
 
 ---
 
