@@ -22,7 +22,7 @@ const DEFAULT_VOICE_ID   = 'EXAVITQu4vr4xnSDxMaL';   // your library voice (requ
 
 const MODEL_MAP = {
     building: 'geoscope-v2/1',
-    hvac: 'hvac-detection-ujree/1'
+    hvac: 'hvac-detection-ujree/4'
 };
 const DEFAULT_MODEL = MODEL_MAP.building;
 
